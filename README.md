@@ -6,3 +6,14 @@ Este proyecto se enmarca dentro del curso de Fundamentos de Algoritmos y tiene c
 
 ### El objetivo 
 Proteger los turbogeneradores de energía de cualquier incidencia que pueda desencadenar un amago de incendio , determinando la secuencia de eventos que activan los dispositivos anunciadores (Luces Estroboscópicas).
+ 
+---------------------------------------------------
+
+## Tecnologías y Herramientas Utilizadas
+
+- Lenguaje de Programación: C# 
+    - Implementado como una aplicación de Consola (.NET).
+- Versionamiento: Git y GitHub.
+    - Utilizado para el trabajo colaborativo y el control de versiones del código fuente.
+- Editor/IDE: Visual Studio IDE.
+- Gestión de Repositorio: GitHub Desktop (como interfaz gráfica de Git).

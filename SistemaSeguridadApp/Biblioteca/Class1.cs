@@ -96,39 +96,36 @@ namespace Biblioteca
             }
         }
 
-        //alarma
+        //alarma (CHATGPT)
         public void alarma()
         {
             {
                 comprobar_alarma();
 
-               
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"\n*** ESTADO: ALARMA ACTIVADA! ***");
 
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                // Guardamos posición actual (para no pisar texto)
+                int lineaSirena = Console.CursorTop;
 
-
-
-                // ACTIVAR SIRENA EN SEGUNDO PLANO
+                // Activamos la sirena en segundo plano, enviando la línea donde debe dibujarse
                 estado_alarma_parpadeante = true;
-                Thread hiloSirena = new Thread(sirena); //Ayuda CHATGPT
+                Thread hiloSirena = new Thread(() => sirena(lineaSirena));
                 hiloSirena.IsBackground = true;
                 hiloSirena.Start();
 
+                // Ahora sí mostramos MENSAJE abajo sin interferencia
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"\nMENSAJE: ");
+                Console.WriteLine("\nMENSAJE:");
                 Console.ReadKey();
-                estado_alarma_parpadeante = false;
 
-                
+                estado_alarma_parpadeante = false;
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("=============================================\n");
             }
         }
 
-        //Sirena (ayuda con IA)
-        public void sirena()
+        //Sirena (CHATGPT)
+        public void sirena(int linea)
         {
             {
                 Console.Title = "Sirena Estroboscópica Simple";
@@ -139,15 +136,18 @@ namespace Biblioteca
 
                 while (estado_alarma_parpadeante)
                 {
+                    Console.SetCursorPosition(0, linea);
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("\r" + barra);
+                    Console.Write(barra);
 
                     Thread.Sleep(intervalo);
 
-                    Console.Write("\r" + new string(' ', barra.Length)); // apagar
+                    
+                    Console.SetCursorPosition(0, linea);
+                    Console.Write(new string(' ', barra.Length));
+
                     Thread.Sleep(intervalo);
                 }
-
             }
         }
 

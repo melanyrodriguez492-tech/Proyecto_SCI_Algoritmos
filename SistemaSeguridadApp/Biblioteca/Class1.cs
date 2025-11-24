@@ -17,6 +17,7 @@ namespace Biblioteca
         // MENU PRINCIPAL
         public void menu()
         {
+            mensaje_opciones();
             bool valor_bool = true;
 
             while (valor_bool)
@@ -31,7 +32,7 @@ namespace Biblioteca
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("\nMENSAJE: (ninguno)");
+                Console.WriteLine($"\nMENSAJE: {mensaje[0]}");
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.WriteLine("\nSeleccione la acción a simular:");
@@ -56,7 +57,9 @@ namespace Biblioteca
                         {
                             post_seleccion();
                             activar_alarma();
-                            Console.WriteLine("\nHola");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine($"\nMENSAJE: {mensaje[1]}");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                         break;
 
@@ -135,7 +138,6 @@ namespace Biblioteca
         public void activar_alarma()
         {
             comprobar_alarma();
-            
 
             int lineaSirena = Console.CursorTop;
 
@@ -151,8 +153,18 @@ namespace Biblioteca
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        //MENSAJES
+        public void mensaje_opciones()
+        {
 
+            mensaje[0] = "Sistema SCI // Monitoreando...";
+            mensaje[1] = "HUMOOOO";
+            mensaje[2] = "TEMPERATURA CRITICA";
+            mensaje[3] = "ESTACION MANUAL";
+            mensaje[4] = "FALLO DE SENSOR";
+            mensaje[5] = "Sistema SCI // Monitoreando...";
 
+        }
 
     }
 

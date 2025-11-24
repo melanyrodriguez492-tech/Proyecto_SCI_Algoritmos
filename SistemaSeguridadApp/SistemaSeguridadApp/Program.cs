@@ -14,12 +14,10 @@ namespace SistemaSeguridadApp
 
             biblioteca x = new biblioteca();
         
-            x.menu();
-            
+            x.menu();            
 
         }
     }
-
 }
 
 

@@ -18,6 +18,8 @@ Proteger los turbogeneradores de energía de cualquier incidencia que pueda dese
 - Editor/IDE: Visual Studio IDE.
 - Gestión de Repositorio: GitHub Desktop (como interfaz gráfica de Git).
 
+------------------------------------------------------------------
+
 ## Flujo del Algoritmo (Panel Central)
 - Estados del Sistema de Monitoreo
 1. Estado: Normal (Monitoreo)
@@ -44,3 +46,18 @@ Muestra un aviso de mantenimiento sin activar la alarma general, evitando falsas
 El usuario selecciona la opción RESET.
 - Acción Clave del Sistema:
 El sistema vuelve al estado Normal si la amenaza inicial ha cesado.
+
+-------------------------------------------------------------------
+## Instrucciones de Uso y Ejecución
+1. Clonar el Repositorio:
+- Copia la URL del repositorio.
+Clona el proyecto usando GitHub Desktop o la línea de comandos (git clone [URL]).
+
+2. Abrir en Visual Studio:
+- Abre la solución SistemaSeguridadApp.sln dentro de la carpeta clonada en el Visual Studio IDE (2022 o similar).
+
+3. Ejecución:
+- Presiona F5 o haz clic en el botón "Start" para compilar y ejecutar el programa de consola.
+
+4. Simular Eventos:
+- Utiliza las opciones del menú numeradas del 1 al 6 para simular las condiciones de alarma (Humo, Temperatura), falla o reseteo del sistema.

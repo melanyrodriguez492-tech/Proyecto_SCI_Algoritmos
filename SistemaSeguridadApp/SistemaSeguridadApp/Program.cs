@@ -18,10 +18,6 @@ namespace SistemaSeguridadApp
         //MENSAJE DE ENCABEZADO
         static string mensaje_fijo = ("Sistema SCI // Monitoreando...");
 
-
-
-
-
         //MENU
         static void Main(string[] args)
         {
@@ -60,17 +56,32 @@ namespace SistemaSeguridadApp
 
                 Console.ForegroundColor = ConsoleColor.White;
 
-                Console.WriteLine("\nSeleccione la acción a simular:");
-                Console.WriteLine("1. Simular Humo (Alarma Principal)");
-                Console.WriteLine("2. Simular Temperatura Crítica (Alarma Principal)");
-                Console.WriteLine("3. Simular Estación Manual Activada (Alarma Principal)");
-                Console.WriteLine("4. Simular Falla de Sensor (Aviso de Mantenimiento)");
-                Console.WriteLine("5. RESETEAR Sistema (Apagar Alarma)");
-                Console.WriteLine("6. Salir");
-                Console.Write("\nSeleccione una opción: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n--- [ PRUEBAS DE SENSORES ] ---");
+                Console.ResetColor();
+                Console.WriteLine("1. Activar Sensor de HUMO (Zona Turbinas)");
+                Console.WriteLine("2. Activar Sensor de TEMPERATURA (Zona Generador)");
+                Console.WriteLine("3. Activar Estación MANUAL (Pasillo)");
 
-                opcion = int.Parse(Console.ReadLine());
-                
+                // Sección 2: Mantenimiento y Fallas
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("\n--- [ MANTENIMIENTO ] ---");
+                Console.ResetColor();
+                Console.WriteLine("4. Reportar FALLA técnica (Sensor averiado)");
+
+                // Sección 3: Control del Sistema
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n--- [ CONTROL DEL SISTEMA ] ---");
+                Console.ResetColor();
+                Console.WriteLine("5. REINICIAR Sistema (Apagar Alarmas)");
+                Console.WriteLine("6. SALIR del Simulador");
+
+                Console.WriteLine("\n==========================================");
+                Console.Write("Ingrese el número de la acción a realizar: ");
+
+
+                opcion = LeerOpcion(1, 6);
+              
 
                 switch (opcion)
                 {
@@ -224,6 +235,11 @@ namespace SistemaSeguridadApp
 
 
         //MENSAJES
+
+
+
+
+
         static void mensaje_opciones()
         {
             mensaje[0] = "Sistema SCI // Monitoreando...";
@@ -233,13 +249,7 @@ namespace SistemaSeguridadApp
             mensaje[4] = "Sensor de Humo no responde en Zona 1. Contacte a mantenimiento";
         }
 
-
-
-
-
-
-
-        // SIRENA HORIZONTAL (CHATGPT)
+        
         static void alarma(int lineaSirena)
         {
             Console.CursorVisible = false;
@@ -268,11 +278,40 @@ namespace SistemaSeguridadApp
             Console.CursorVisible = true;
         }
 
+        static int LeerOpcion(int minValor, int maxValor)
+        {
+            int valor;
+            while (true)
+            {
+                string entrada = Console.ReadLine();
 
+                if (string.IsNullOrWhiteSpace(entrada))
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"Entrada vacía. Introduzca un número entre {minValor} y {maxValor}:");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    continue;
+                }
 
+                if (!int.TryParse(entrada.Trim(), out valor))
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"Entrada no numérica. Introduzca un número entre {minValor} y {maxValor}:");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    continue;
+                }
 
+                if (valor < minValor || valor > maxValor)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"Opción fuera de rango. Introduzca un número entre {minValor} y {maxValor}:");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    continue;
+                }
 
-        // ACTIVAR ALARMA (CHATGPT)
+                return valor;
+            }
+        }
         static void activar_alarma()
         {
             comprobar_alarma();

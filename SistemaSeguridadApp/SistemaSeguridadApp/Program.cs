@@ -84,6 +84,7 @@ namespace SistemaSeguridadApp
               
 
                 switch (opcion)
+                //Dependiendo del número que el usuario haya elegido (entre 1 y 6), se ejecutará el bloque correspondiente.
                 {
                     case 1:
                         if (estado_alarma)
@@ -193,25 +194,14 @@ namespace SistemaSeguridadApp
             }
         }
 
-
-
-
-
-
-
-        // MENSAJE DE ALARMA ACTIVA
-        static void post_seleccion()
+        static void mensaje_opciones()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\n==============================================");
-            Console.WriteLine("       *** ESTADO: ALARMA ACTIVADA! ***   ");
-            Console.WriteLine("==============================================");
-            Console.ForegroundColor = ConsoleColor.White;
+            mensaje[0] = "Sistema SCI // Monitoreando...";
+            mensaje[1] = "ALARMA DE HUMO DETECTADA en Zona de Turbina A.";
+            mensaje[2] = "ALARMA DE TEMPERATURA CRÍTICA DETECTADA en Zona de Generador Auxiliar.";
+            mensaje[3] = "ALARMA DE ESTACIÓN MANUAL DETECTADA en Pasillo de Emergencia.";
+            mensaje[4] = "Sensor de Humo no responde en Zona 1. Contacte a mantenimiento";
         }
-
-
-
-
 
         // CAMBIA ESTADO DE ALARMA
         static void comprobar_alarma()
@@ -232,24 +222,39 @@ namespace SistemaSeguridadApp
 
 
 
+        // MENSAJE DE ALARMA ACTIVA
+        static void post_seleccion()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n==============================================");
+            Console.WriteLine("       *** ESTADO: ALARMA ACTIVADA! ***   ");
+            Console.WriteLine("==============================================");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        static void activar_alarma()
+        {
+            comprobar_alarma();
+
+            int lineaSirena = Console.CursorTop;
+
+            estado_alarma_parpadeante = true;
+            Thread hilo = new Thread(() => alarma(lineaSirena));
+            hilo.IsBackground = true;
+            hilo.Start();
+
+            Console.SetCursorPosition(0, lineaSirena + 0);
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
 
 
         //MENSAJES
 
 
 
-
-
-        static void mensaje_opciones()
-        {
-            mensaje[0] = "Sistema SCI // Monitoreando...";
-            mensaje[1] = "ALARMA DE HUMO DETECTADA en Zona de Turbina A.";
-            mensaje[2] = "ALARMA DE TEMPERATURA CRÍTICA DETECTADA en Zona de Generador Auxiliar.";
-            mensaje[3] = "ALARMA DE ESTACIÓN MANUAL DETECTADA en Pasillo de Emergencia.";
-            mensaje[4] = "Sensor de Humo no responde en Zona 1. Contacte a mantenimiento";
-        }
-
-        
         static void alarma(int lineaSirena)
         {
             Console.CursorVisible = false;
@@ -312,22 +317,6 @@ namespace SistemaSeguridadApp
                 return valor;
             }
         }
-        static void activar_alarma()
-        {
-            comprobar_alarma();
-
-            int lineaSirena = Console.CursorTop;
-
-            estado_alarma_parpadeante = true;
-            Thread hilo = new Thread(() => alarma(lineaSirena));
-            hilo.IsBackground = true;
-            hilo.Start();
-
-            Console.SetCursorPosition(0, lineaSirena + 0);
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("");
-            Console.ForegroundColor = ConsoleColor.White;
-        }
+        
     }
 }
